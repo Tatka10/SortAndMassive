@@ -3,6 +3,7 @@ package org.example;
 import java.util.Arrays;
 
 //демонстрация сортировок на примере массива имен
+
 //Задание: 0. Выделить пузырьковую сортировку в отдельный метод
 //1. покрыть тестами - Assertarraysequals
 //2. реализовать и объяснить как и для какого случая использовать обменную сортировку с флагом
@@ -17,8 +18,11 @@ public class Main {
         String[] mass = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
 
         System.out.println(Arrays.toString(mass));
-        System.out.println(Arrays.toString(sortByMinElement(mass)));
-        // System.out.println(Arrays.toString(sortByBubble(mass)));
+        String[] mass2 = sortByMinElement(mass);
+//        System.out.println(Arrays.toString(mass));
+//        System.out.println(Arrays.toString(mass2));
+        // System.out.println(Arrays.toString(mass2));
+        System.out.println(Arrays.toString(sortByBubble(mass)));
         //System.out.println(Arrays.toString(sortByBubbleWithFlag(mass)));
 //        for (int b = 0; b < mass.length - 1; b++) {
 //            for (int a = 0; a < mass.length - 1 - b; a++) {
@@ -39,73 +43,80 @@ public class Main {
         mass[x] = mass[y];
         mass[y] = a;
     }
+//final  не работает, так как ссылка на массив не меняется, меняются только элементы в массиве
 
-    public static String[] sortByBubble(String[] mass) {
-        for (int b = 0; b < mass.length - 1; b++) {
-            for (int a = 0; a < mass.length - 1 - b; a++) {
-                if (mass[a].compareTo(mass[a + 1]) > 0) {
-                    swap(mass, a, a + 1);
+    public static String[] sortByBubble(final String[] mass) {
+        String[] copy = Arrays.copyOf(mass, mass.length);
+        for (int b = 0; b < copy.length - 1; b++) {
+            for (int a = 0; a < copy.length - 1 - b; a++) {
+                if (copy[a].compareTo(copy[a + 1]) > 0) {
+                    swap(copy, a, a + 1);
                 }
-
             }
         }
-        return mass;
+        return copy;
     }
 
-    //пузырьковая сортировка с проверкой необходимости итерации
+    //пузырьковая сортировка с проверкой необходимости итерации-!!!переделать
     public static String[] sortByBubbleWithFlag(String[] mass) {
+        String[] copy = Arrays.copyOf(mass, mass.length);
         boolean flag = false;// требуется проход
-        while (flag == false) {
-            flag = true;
-            for (int i = 0; i < mass.length - 1; i++) {
-                if (mass[i].compareTo(mass[i + 1]) > 0) {
-                    swap(mass, i, i + 1);
-                    flag = false;
+        for (int i = 0; i < copy.length - 1; i++) {
+            if (flag == false) {
+                flag = true;
+                for (int y = 0; y < copy.length - 1 - i; y++) {
+                    if (copy[y].compareTo(copy[y + 1]) > 0) {
+                        swap(copy, y, y + 1);
+                        flag = false;
+                    }
                 }
-
             }
         }
 
 
-        return mass;
+        return copy;
     }
 
     //сортировка с выбором минимума/максимума
-    public static String[] sortByMinElement(String[] mass) {
-        for (int i = 0; i < mass.length; i++) {
-            int x = i;
-            String min = mass[i];
-            for (int j = i + 1; j < mass.length; j++) {
-                if (mass[j].compareTo(min) < 0) {
-                    x = j;
-                    min = mass[j];
+    public static String[] sortByMinElement(final String[] mass) {
+        String[] copy = Arrays.copyOf(mass, mass.length);
+
+        for (int i = 0; i < copy.length; i++) {
+            int numberMin = i;
+            String min = copy[i];
+            for (int j = i + 1; j < copy.length; j++) {
+                if (copy[j].compareTo(min) < 0) {
+                    numberMin = j;
+                    min = copy[j];
                 }
             }
-
-            mass[x] = mass[i];
-            mass[i] = min;
+            swap(copy, i, numberMin);
+//            copy[numberMin] = copy[i];
+//            copy[i] = min;
 
 
         }
-        return mass;
+        return copy;
     }
 
     //челночная сортировка
     public static String[] sortByShuttleSort(String[] mass) {
-        for (int i = 1; i < mass.length; i++) {
-            if (mass[i].compareTo(mass[i - 1]) < 0) {
-                swap(mass, i, i - 1);
+        String[] copy = Arrays.copyOf(mass, mass.length);
+        for (int i = 1; i < copy.length; i++) {
+            if (copy[i].compareTo(copy[i - 1]) < 0) {
+                swap(copy, i, i - 1);
                 for (int z = i - 1; z - 1 >= 0; z--) {
-                    if (mass[z].compareTo(mass[z - 1]) < 0) {
-                        swap(mass, z, z - 1);
+                    if (copy[z].compareTo(copy[z - 1]) < 0) {
+                        swap(copy, z, z - 1);
                     } else break;
-
                 }
-
             }
         }
-        return mass;
+        return copy;
     }
     //сортировка слиянием
+    //Колода карт- отработать сортировка  12 карт по номиналу
+    //реализовать процедуру слияния!
+    // задача
 
 }

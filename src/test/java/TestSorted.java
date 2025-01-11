@@ -2,34 +2,47 @@ import org.example.Main;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class TestSorted {
 
 
     @Test
     public void test1() {
-        String[] expected = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
-        String [] actual ={"Anya","Igor","Masha","Petya","Vasya"};
-        Assert.assertArrayEquals(actual, Main.sortByBubble(expected));
+        String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        Assert.assertArrayEquals(expected, Main.sortByBubble(original));
+        Assert.assertArrayEquals(originalCopy, original);
 
     }
+
     @Test
     public void test2() {
-        String[] expected = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
-        String [] actual ={"Anya","Igor","Masha","Petya","Vasya"};
-        Assert.assertArrayEquals(actual, Main.sortByBubbleWithFlag(expected));
+        String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        Assert.assertArrayEquals(expected, Main.sortByBubbleWithFlag(original));
+        Assert.assertArrayEquals(originalCopy, original);
 
     }
+
     @Test
     public void test3() {
-        String[] expected = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
-        String[] actual = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
-        Assert.assertArrayEquals(actual, Main.sortByMinElement(expected));
+        String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        Assert.assertArrayEquals(expected, Main.sortByMinElement(original));
+        Assert.assertArrayEquals(originalCopy, original);
     }
+
     @Test
     public void test4() {
-        String[] expected = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
-        String [] actual ={"Anya","Igor","Masha","Petya","Vasya"};
-        Assert.assertArrayEquals(actual, Main.sortByShuttleSort(expected));
+        String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        Assert.assertArrayEquals(expected, Main.sortByShuttleSort(original));
+        Assert.assertArrayEquals(originalCopy, original);
 
     }
 
