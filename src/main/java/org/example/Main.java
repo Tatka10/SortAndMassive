@@ -5,6 +5,7 @@ import java.util.Arrays;
 //демонстрация сортировок на примере массива имен
 
 //Задание: 0. Выделить пузырьковую сортировку в отдельный метод
+
 //1. покрыть тестами - Assertarraysequals
 //2. реализовать и объяснить как и для какого случая использовать обменную сортировку с флагом
 // (пузырьковую сортировку с проверкой необходимости дальнейших итераци neediteration)
@@ -61,19 +62,16 @@ public class Main {
     public static String[] sortByBubbleWithFlag(String[] mass) {
         String[] copy = Arrays.copyOf(mass, mass.length);
         boolean flag = false;// требуется проход
-        for (int i = 0; i < copy.length - 1; i++) {
-            if (flag == false) {
-                flag = true;
-                for (int y = 0; y < copy.length - 1 - i; y++) {
-                    if (copy[y].compareTo(copy[y + 1]) > 0) {
-                        swap(copy, y, y + 1);
-                        flag = false;
-                    }
+        for (int i = 0; i < copy.length - 1 && !flag; i++) {
+//            if (flag == false)
+            flag = true;
+            for (int y = 0; y < copy.length - 1 - i; y++) {
+                if (copy[y].compareTo(copy[y + 1]) > 0) {
+                    swap(copy, y, y + 1);
+                    flag = false;
                 }
             }
         }
-
-
         return copy;
     }
 
@@ -114,9 +112,35 @@ public class Main {
         }
         return copy;
     }
+
     //сортировка слиянием
     //Колода карт- отработать сортировка  12 карт по номиналу
     //реализовать процедуру слияния!
     // задача
+    public static String[] sortMerge(String[] arr) {
+        int len = arr.length;
+        if (len < 2) return arr;
+        int middle = len / 2;
+        return merge(sortMerge(Arrays.copyOfRange(arr, 0, middle)),
+                sortMerge(Arrays.copyOfRange(arr, middle, len)));
+    }
 
+
+    public static String[] merge(String[] arr_1, String[] arr_2) {
+        int len_1 = arr_1.length, len_2 = arr_2.length;
+        int a = 0, b = 0, len = len_1 + len_2; // a, b - счетчики в массивах
+        String[] result = new String[len];
+        for (int i = 0; i < len; i++) {
+            if (b < len_2 && a < len_1) {
+                if (arr_1[a].compareTo(arr_2[b]) > 0) result[i] = arr_2[b++];
+                else result[i] = arr_1[a++];
+            } else if (b < len_2) {
+                result[i] = arr_2[b++];
+            } else {
+                result[i] = arr_1[a++];
+            }
+        }
+        return result;
+    }
 }
+
