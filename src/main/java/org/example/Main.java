@@ -125,7 +125,6 @@ public class Main {
                 sortMerge(Arrays.copyOfRange(arr, middle, len)));
     }
 
-
     public static String[] merge(String[] arr_1, String[] arr_2) {
         int len_1 = arr_1.length, len_2 = arr_2.length;
         int a = 0, b = 0, len = len_1 + len_2; // a, b - счетчики в массивах
@@ -142,5 +141,36 @@ public class Main {
         }
         return result;
     }
+    //быстрая сортировка
+
+    public static String[] quickSort(String[] sortArr, int low, int high) {
+        String[] sortCopy = Arrays.copyOf(sortArr, sortArr.length);
+        //завершить,если массив пуст или уже нечего делить
+        if (sortCopy.length == 0 || low >= high) return sortCopy;
+
+        //выбираем опорный элемент
+        int middle = low + (high - low) / 2;
+        String border = sortCopy[middle];
+
+        //разделяем на подмассивы и меняем местами
+        int i = low, j = high;
+        while (i <= j) {
+            while (sortCopy[i].compareTo(border) < 0) i++;
+            while (sortCopy[j].compareTo(border) > 0) j--;
+            if (i <= j) {
+                String swap = sortCopy[i];
+                sortCopy[i] = sortCopy[j];
+                sortCopy[j] = swap;
+                i++;
+                j--;
+            }
+        }
+
+        //рекурсия для сортировки левой и правой части
+        if (low < j) quickSort(sortCopy, low, j);
+        if (i < high) quickSort(sortCopy, i, high);
+        return sortCopy;
+    }
+
 }
 

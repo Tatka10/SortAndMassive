@@ -196,4 +196,13 @@ public class TestSorted {
         Assert.assertArrayEquals(expected, Main.sortMerge(original));
         Assert.assertArrayEquals(originalCopy, original);
     }
+    @Test
+    public void test21() {
+        String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
+       String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        Assert.assertArrayEquals(expected, Main.quickSort(original,0,original.length-1));
+        Assert.assertArrayEquals(originalCopy, original);
+
+    }
 }
