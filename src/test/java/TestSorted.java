@@ -196,13 +196,44 @@ public class TestSorted {
         Assert.assertArrayEquals(expected, Main.sortMerge(original));
         Assert.assertArrayEquals(originalCopy, original);
     }
+
     @Test
     public void test21() {
         String[] original = {"Petya", "Vasya", "Anya", "Masha", "Igor"};
-       String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] originalCopy = Arrays.copyOf(original, original.length);
         String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
-        Assert.assertArrayEquals(expected, Main.quickSort(original,0,original.length-1));
+        System.out.println(Arrays.toString(Main.quickSort(originalCopy, 0, originalCopy.length - 1)));
+        Assert.assertArrayEquals(expected, Main.quickSort(originalCopy, 0, originalCopy.length - 1));
         Assert.assertArrayEquals(originalCopy, original);
-
     }
+
+    @Test
+    public void test22() {
+        String[] original = {};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {};
+        System.out.println(Arrays.toString(Main.quickSort(originalCopy, 0, originalCopy.length - 1)));
+        Assert.assertArrayEquals(expected, Main.quickSort(original, 0, original.length - 1));
+        Assert.assertArrayEquals(originalCopy, original);
+    }
+
+    @Test
+    public void test23() {
+        String[] original = {"Vasya", "Petya", "Masha", "Igor", "Anya"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        System.out.println(Arrays.toString(Main.quickSort(originalCopy, 0, originalCopy.length - 1)));
+        Assert.assertArrayEquals(expected, Main.quickSort(original, 0, original.length - 1));
+        Assert.assertArrayEquals(originalCopy, original);
+    }
+    @Test
+    public void test24() {
+        String[] original = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        String[] originalCopy = Arrays.copyOf(original, original.length);
+        String[] expected = {"Anya", "Igor", "Masha", "Petya", "Vasya"};
+        System.out.println(Arrays.toString(Main.quickSort(originalCopy, 0, originalCopy.length - 1)));
+        Assert.assertArrayEquals(expected, Main.quickSort(original, 0, original.length - 1));
+        Assert.assertArrayEquals(originalCopy, original);
+    }
+
 }
